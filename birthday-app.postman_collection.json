@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "fd14c318-bb37-41fb-aac5-5ca56e452c2f",
+		"name": "birthday-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "checkBirthday",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"birthday\": \"1986-08-22T16:30:00Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/birthday",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"birthday"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a8a893a8-5abe-4f5f-b442-0ffc3f88869e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "10255dbf-39ba-4047-b079-8cbf3917c0af",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f8e25797-0008-460c-848e-464dd27f5e07",
+			"key": "api",
+			"value": "https://c3patn17z1.execute-api.eu-west-1.amazonaws.com/dev"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
