@@ -16,13 +16,13 @@ import (
 // https://serverless.com/framework/docs/providers/aws/events/apigateway/#lambda-proxy-integration
 type Response events.APIGatewayProxyResponse
 
-var buf bytes.Buffer
-var req BodyRequest
-var b Birthday
-var err error
-
 // Handler is our lambda handler invoked by the `lambda.Start` function call
 func Handler(request events.APIGatewayProxyRequest) (Response, error) {
+
+	var buf bytes.Buffer
+	var req BodyRequest
+	var b Birthday
+	var err error
 
 	log.Printf("Request body:\n %s", request.Body)
 	// Unmarshal the json, return 404 if error
@@ -49,8 +49,9 @@ func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 		IsBase64Encoded: false,
 		Body:            buf.String(),
 		Headers: map[string]string{
-			"Content-Type":           "application/json",
-			"X-MyCompany-Func-Reply": "hello-handler",
+			"Content-Type":                "application/json",
+			"X-MyCompany-Func-Reply":      "hello-handler",
+			"Access-Control-Allow-Origin": "*",
 		},
 	}
 
@@ -76,7 +77,7 @@ func (b *Birthday) getBirthday() string {
 	return b.Born.Format(time.RFC3339)
 }
 
-func (b *Birthday) setBirthday(date string) error {
+func (b *Birthday) setBirthday(date string) (err error) {
 	b.Born, err = time.Parse(
 		time.RFC3339,
 		date)
@@ -89,7 +90,6 @@ func (b *Birthday) DecimalBirthday() {
 	}
 	for i := 1; i < 42; i++ {
 		b.MinutesRoundDecimalBirthday = append(b.MinutesRoundDecimalBirthday, b.Born.Add(time.Minute*time.Duration(i*1000000)))
-
 	}
 	for i := 1; i < 27; i++ {
 		b.SecondsRoundDecimalBirthday = append(b.SecondsRoundDecimalBirthday, b.Born.Add(time.Second*time.Duration(i*100000000)))

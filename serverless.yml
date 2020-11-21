@@ -64,6 +64,11 @@ functions:
       - http:
           path: birthday
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Access-Control-Allow-Origin
+              - Content-Type
   world:
     handler: bin/world
     events:
