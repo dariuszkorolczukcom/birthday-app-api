@@ -1,10 +1,5 @@
-module github.com/dariuszkorolczukcom/birthday-app
+module github.com/dariuszkorolczukcom/birthday-app-api
 
-require (
-	github.com/aws/aws-lambda-go v1.6.0
-	github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs v0.0.0-00010101000000-000000000000
-)
-
-replace github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs => ./birthday/structs
+require github.com/aws/aws-lambda-go v1.6.0
 
 go 1.13

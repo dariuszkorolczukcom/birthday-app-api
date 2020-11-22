@@ -5,9 +5,10 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs"
 )
 
 // Response is of type APIGatewayProxyResponse since we're leveraging the
