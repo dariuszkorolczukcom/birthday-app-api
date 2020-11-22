@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"log"
-	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/dariuszkorolczukcom/birthday-app-api/structs"
 )
 
 // Response is of type APIGatewayProxyResponse since we're leveraging the
@@ -20,8 +20,8 @@ type Response events.APIGatewayProxyResponse
 func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 
 	var buf bytes.Buffer
-	var req BodyRequest
-	var b Birthday
+	var req structs.BodyRequest
+	var b structs.Birthday
 	var err error
 
 	log.Printf("Request body:\n %s", request.Body)
@@ -60,38 +60,4 @@ func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 
 func main() {
 	lambda.Start(Handler)
-}
-
-type BodyRequest struct {
-	BirthdayDate string `json:"birthday"`
-}
-
-type Birthday struct {
-	Born                        time.Time
-	HoursRoundDecimalBirthday   []time.Time
-	MinutesRoundDecimalBirthday []time.Time
-	SecondsRoundDecimalBirthday []time.Time
-}
-
-func (b *Birthday) getBirthday() string {
-	return b.Born.Format(time.RFC3339)
-}
-
-func (b *Birthday) setBirthday(date string) (err error) {
-	b.Born, err = time.Parse(
-		time.RFC3339,
-		date)
-	return err
-}
-
-func (b *Birthday) DecimalBirthday() {
-	for i := 1; i < 7; i++ {
-		b.HoursRoundDecimalBirthday = append(b.HoursRoundDecimalBirthday, b.Born.Add(time.Hour*time.Duration(i*100000)))
-	}
-	for i := 1; i < 42; i++ {
-		b.MinutesRoundDecimalBirthday = append(b.MinutesRoundDecimalBirthday, b.Born.Add(time.Minute*time.Duration(i*1000000)))
-	}
-	for i := 1; i < 27; i++ {
-		b.SecondsRoundDecimalBirthday = append(b.SecondsRoundDecimalBirthday, b.Born.Add(time.Second*time.Duration(i*100000000)))
-	}
 }
