@@ -13,11 +13,11 @@ type Birthday struct {
 	SecondsRoundDecimalBirthday []time.Time
 }
 
-func (b *Birthday) getBirthday() string {
+func (b *Birthday) GSetBirthday() string {
 	return b.Born.Format(time.RFC3339)
 }
 
-func (b *Birthday) setBirthday(date string) (err error) {
+func (b *Birthday) SetBirthday(date string) (err error) {
 	b.Born, err = time.Parse(
 		time.RFC3339,
 		date)

@@ -7,7 +7,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/dariuszkorolczukcom/birthday-app-api/structs"
+	"github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs"
 )
 
 // Response is of type APIGatewayProxyResponse since we're leveraging the
@@ -32,7 +32,7 @@ func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 	}
 	log.Printf("Request Object parsed:\n %v", req)
 
-	err = b.setBirthday(req.BirthdayDate)
+	err = b.SetBirthday(req.BirthdayDate)
 	if err != nil {
 		return Response{Body: err.Error(), StatusCode: 400}, nil
 	}
