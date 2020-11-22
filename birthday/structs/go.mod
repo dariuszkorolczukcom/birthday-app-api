@@ -1,3 +1,3 @@
-module github.com/dariuszkorolczukcom/birthday-app-api/birthday/structs
+module github.com/dariuszkorolczukcom/birthday-app/birthday/structs
 
 go 1.13
