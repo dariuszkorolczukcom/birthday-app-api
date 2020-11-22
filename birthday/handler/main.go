@@ -37,7 +37,9 @@ func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 		return Response{Body: err.Error(), StatusCode: 400}, nil
 	}
 	log.Printf("Birthday Object with parsed time:\n %v", b)
-	b.DecimalBirthday()
+	b.CountHoursRoundDecimalBirthday()
+	b.CountMinutesRoundDecimalBirthday()
+	b.CountSecondsRoundDecimalBirthday()
 	body, err := json.Marshal(b)
 	if err != nil {
 		return Response{Body: err.Error(), StatusCode: 500}, nil

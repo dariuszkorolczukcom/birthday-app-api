@@ -24,6 +24,7 @@ frameworkVersion: '>=1.28.0 <2.0.0'
 provider:
   name: aws
   runtime: go1.x
+  stage: ${opt:stage, 'dev'}
   profile: private
   region: eu-west-1
 
@@ -56,10 +57,12 @@ package:
     - ./**
   include:
     - ./bin/**
+  individually: true
 
 functions:
   birthday:
     handler: bin/birthday
+    name: birthday-counter-${self:provider.stage}
     events:
       - http:
           path: birthday
