@@ -7,10 +7,10 @@ type BodyRequest struct {
 }
 
 type Birthday struct {
-	Born                        time.Time   `json:"birthdayDate"`
-	HoursRoundDecimalBirthday   []time.Time `json:"hoursDecimal"`
-	MinutesRoundDecimalBirthday []time.Time `json:"minutesDecimal"`
-	SecondsRoundDecimalBirthday []time.Time `json:"secondsDecimal"`
+	Born                        time.Time           `json:"birthdayDate"`
+	HoursRoundDecimalBirthday   map[int64]time.Time `json:"hoursDecimal"`
+	MinutesRoundDecimalBirthday map[int64]time.Time `json:"minutesDecimal"`
+	SecondsRoundDecimalBirthday map[int64]time.Time `json:"secondsDecimal"`
 }
 
 func (b *Birthday) GetBirthday() string {
@@ -25,19 +25,28 @@ func (b *Birthday) SetBirthday(date string) (err error) {
 }
 
 func (b *Birthday) CountHoursRoundDecimalBirthday() {
+	m := make(map[int64]time.Time)
 	for i := 1; i < 7; i++ {
-		b.HoursRoundDecimalBirthday = append(b.HoursRoundDecimalBirthday, b.Born.Add(time.Hour*time.Duration(i*100000)))
+		n := int64(i * 100000)
+		m[n] = b.Born.Add(time.Hour * time.Duration(n))
 	}
+	b.HoursRoundDecimalBirthday = m
 }
 
 func (b *Birthday) CountMinutesRoundDecimalBirthday() {
+	m := make(map[int64]time.Time)
 	for i := 1; i < 42; i++ {
-		b.MinutesRoundDecimalBirthday = append(b.MinutesRoundDecimalBirthday, b.Born.Add(time.Minute*time.Duration(i*1000000)))
+		n := int64(i * 1000000)
+		m[n] = b.Born.Add(time.Minute * time.Duration(n))
 	}
+	b.MinutesRoundDecimalBirthday = m
 }
 
 func (b *Birthday) CountSecondsRoundDecimalBirthday() {
+	m := make(map[int64]time.Time)
 	for i := 1; i < 27; i++ {
-		b.SecondsRoundDecimalBirthday = append(b.SecondsRoundDecimalBirthday, b.Born.Add(time.Second*time.Duration(i*100000000)))
+		n := int64(i * 100000000)
+		m[n] = b.Born.Add(time.Second * time.Duration(n))
 	}
+	b.SecondsRoundDecimalBirthday = m
 }
