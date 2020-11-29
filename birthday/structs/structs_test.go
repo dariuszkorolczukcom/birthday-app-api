@@ -18,7 +18,7 @@ func TestParseDate(t *testing.T) {
 		time.RFC3339,
 		EwciaBday)
 
-	if !b.Born.Equal(parsedDate) {
+	if !b.born.Equal(parsedDate) {
 		t.Errorf("Date was incorrectly parsed: %v, want: %v.", b.GetBirthday(), parsedDate)
 	}
 }
